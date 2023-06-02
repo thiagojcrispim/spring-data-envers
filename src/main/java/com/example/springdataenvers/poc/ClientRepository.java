@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.history.RevisionRepository;
 
 public interface ClientRepository extends
-        JpaRepository<Client, Long>,
-        RevisionRepository<Client, Long, Long> {
+        JpaRepository<Client, ClientId>,
+        RevisionRepository<Client, ClientId, Long> {
 }

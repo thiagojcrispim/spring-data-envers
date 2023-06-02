@@ -14,9 +14,8 @@ import javax.persistence.*;
 @AuditTable(value = "client_aud", schema = "envers_audit")
 public class Client {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @EmbeddedId
+    private ClientId id;
 
     private String name;
 
@@ -28,7 +27,10 @@ public class Client {
     protected Client() {
     }
 
-    public Client(final String name, final Integer age) {
+    public Client(final Long id, final Long cpf, final String name, final Integer age) {
+        this.id = new ClientId();
+        this.id.setId(id);
+        this.id.setCpf(cpf);
         this.name = name;
         this.age = age;
     }

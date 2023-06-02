@@ -1,10 +1,7 @@
 package com.example.springdataenvers.poc;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,28 +13,28 @@ public class ClientController {
     private final ClientRepository repository;
 
     @GetMapping
-    public Client get(@PathVariable Long cod) {
+    public Client get(@PathVariable ClientId cod) {
         return repository.findById(cod)
             .orElse(null);
     }
 
     @GetMapping("create")
     public Client create() {
-        return repository.save(new Client("Thaigo", 35));
+        return repository.save(new Client(1L,999L,"Thaigo", 35));
     }
 
-    @GetMapping("update-age/{cod}/{age}")
-    public Client updateAge(@PathVariable Long cod, @PathVariable Integer age) {
+    @PostMapping("update-age/{cod}")
+    public Client updateAge(@PathVariable ClientId cod, @RequestBody UpdateAgeDTO newAge) {
         return repository.findById(cod)
-            .map(person -> {
-                person.setAge(age);
-                return repository.save(person);
-            })
-            .orElse(null);
+                .map(client -> {
+                    client.setAge(newAge.getAge());
+                    return repository.save(client);
+                })
+                .orElse(null);
     }
 
     @GetMapping("delete")
-    public void delete(@PathVariable Long cod) {
+    public void delete(@PathVariable ClientId cod) {
         repository.deleteById(cod);
     }
 
