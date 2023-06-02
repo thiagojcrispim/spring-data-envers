@@ -1,4 +1,4 @@
-package br.xksoberbado.springdataenvers;
+package com.example.springdataenvers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

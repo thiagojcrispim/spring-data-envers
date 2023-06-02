@@ -1,4 +1,4 @@
-package br.xksoberbado.springdataenvers.ex;
+package com.example.springdataenvers.poc;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -8,11 +8,11 @@ import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
 @Entity
-@Table(name = "revinfo")
+@Table(name = "revinfo", schema = "envers_audit")
 @RevisionEntity(CustomRevisionListener.class)
 @Data
 @ToString(callSuper = true)
 public class CustomRevisionEntity extends DefaultRevisionEntity {
 
-    private String user;
+    private String usuario;
 }
